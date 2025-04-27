@@ -4,33 +4,33 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from flask_bcrypt import Bcrypt  # type: ignore # Secure password hashing
 import os
 
-# ✅ Get Absolute Path for Database
+# Absolute Path for Database
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DB_PATH = os.path.join(BASE_DIR, "instance", "users.db")
 
-# ✅ Initialize Flask App
+# Initialize Flask App
 app = Flask(__name__)
 app.secret_key = 'luxury_churn_ai'  # Security key
 
-# ✅ Configure Database
+# Configure Database
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_PATH}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# ✅ Initialize Flask Extensions
+# Initialize Flask Extensions
 bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
-# ✅ User Model
+# User Model
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)  # Stores hashed password
     account_type = db.Column(db.String(20), nullable=False)  # "Individual" or "Business"
 
-# ✅ Create Database Tables (Ensures Database is Created)
+# Create Database Tables (Ensures Database is Created)
 with app.app_context():
     db.create_all()
     print(f"✅ Database created successfully at: {DB_PATH}")
@@ -39,12 +39,12 @@ with app.app_context():
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# ✅ Home Route
+# Home Route
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# ✅ Signup Route
+# Signup Route
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -68,7 +68,7 @@ def signup():
 
     return render_template('signup.html')
 
-# ✅ Login Route
+# Login Route
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -85,7 +85,7 @@ def login():
 
     return render_template('login.html')
 
-# ✅ Logout Route (LOGOUT WITHOUT DELETING USER ACCOUNT)
+# Logout Route (LOGOUT WITHOUT DELETING USER ACCOUNT)
 @app.route('/logout')
 @login_required
 def logout():
@@ -93,13 +93,13 @@ def logout():
     flash('You have been logged out.', 'success')
     return redirect(url_for('home'))
 
-# ✅ Dashboard Route (Requires Login)
+# Dashboard Route (Requires Login)
 @app.route('/dashboard')
 @login_required
 def dashboard():
     return render_template('dashboard.html', username=current_user.username, account_type=current_user.account_type)
 
-# ✅ Upload Page (Requires Login)
+# Upload Page (Requires Login)
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
@@ -122,17 +122,17 @@ def upload():
 
     return render_template('upload.html')
 
-# ✅ Pricing Page
+# Pricing Page
 @app.route('/pricing')
 def pricing():
     return render_template('pricing.html')
 
-# ✅ Testimonials Page
+# Testimonials Page
 @app.route('/testimonials')
 def testimonials():
     return render_template('testimonials.html')
 
-# ✅ Contact Page
+# Contact Page
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
@@ -142,7 +142,7 @@ def contact():
         flash('Message sent successfully!', 'success')
     return render_template('contact.html')
 
-# ✅ Run Flask App
+# Run Flask App
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()  # Ensures database is created on startup
