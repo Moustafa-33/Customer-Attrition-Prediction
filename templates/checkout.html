@@ -1,0 +1,279 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | Churn AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Your existing checkout styles */
+    body {
+      background-color: #fdf7f0;
+      font-family: 'Inter', sans-serif;
+      color: #4c392a;
+    }
+    .page-section {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 40px;
+      background: #fffdfb;
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+      border: 1px solid #ecded1;
+    }
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #5d3b2e;
+    }
+    .subtitle {
+      color: #7c6755;
+      font-size: 1.15rem;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .form-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #e3d8c9;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+    button[type="submit"] {
+      margin-top: 20px;
+      background-color: #5d3b2e;
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button[type="submit"]:hover {
+      background-color: #3c2518;
+    }
+
+    /* Exact sidebar styles from index */
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+    .show-dropdown {
+      display: flex;
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 20px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+    .back-button {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Exact same sidebar from index -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <!-- Home Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <div id="home-submenu" class="dropdown-content">
+        <a href="{{ url_for('index') }}">Main Home</a>
+        <a href="{{ url_for('demo') }}">Demo</a>
+        <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+        <a href="{{ url_for('insights') }}">Insights</a>
+        <a href="{{ url_for('upload_info') }}">Upload Info</a>
+        <a href="{{ url_for('offer') }}">Launch Offer</a>
+        <a href="{{ url_for('benefits') }}">Benefits</a>
+      </div>
+      <!-- Dashboard Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <div id="dashboard-submenu" class="dropdown-content">
+        <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+        <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+      </div>
+      <!-- Upload Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <div id="upload-submenu" class="dropdown-content">
+        <a href="{{ url_for('upload') }}">Upload CSV</a>
+        <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+        <a href="{{ url_for('upload_history') }}">Upload History</a>
+        <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+        <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+      </div>
+      <!-- Pricing Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <div id="pricing-submenu" class="dropdown-content">
+        <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+        <a href="{{ url_for('checkout') }}">Checkout</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+      </div>
+      <!-- Testimonials Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <div id="testimonials-submenu" class="dropdown-content">
+        <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+        <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+      </div>
+      <!-- Legal + Contact -->
+      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <!-- Auth -->
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+
+  <!-- Toggle Button -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- Back Button -->
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Your existing checkout content -->
+  <main class="page-section">
+    <h1>🛒 Checkout</h1>
+    <p class="subtitle">Complete your purchase below</p>
+
+    <form method="POST" action="/process-checkout" class="form-card">
+      <label>
+        Full Name
+        <input type="text" name="full_name" required placeholder="John Doe" class="form-input">
+      </label>
+
+      <label>
+        Email Address
+        <input type="email" name="email" required placeholder="you@example.com" class="form-input">
+      </label>
+
+      <label>
+        Card Number
+        <input type="text" name="card_number" required placeholder="1234 5678 9012 3456" maxlength="19" class="form-input">
+      </label>
+
+      <div style="display: flex; gap: 12px;">
+        <label style="flex: 1;">
+          Expiry Date
+          <input type="text" name="expiry" required placeholder="MM/YY" maxlength="5" class="form-input">
+        </label>
+        <label style="flex: 1;">
+          CVV
+          <input type="text" name="cvv" required placeholder="123" maxlength="4" class="form-input">
+        </label>
+      </div>
+
+      <label>
+        Billing Address
+        <input type="text" name="address" required placeholder="123 Luxury Ave, Beverly Hills" class="form-input">
+      </label>
+
+      <label>
+        Select Plan
+        <select name="plan" class="form-input">
+          <option value="starter">Starter — $29/month</option>
+          <option value="business">Business — $99/month</option>
+        </select>
+      </label>
+
+      <button type="submit" style="margin-top: 20px; background-color: #5d3b2e; color: #fff;">
+        💳 Complete Purchase
+      </button>
+    </form>
+  </main>
+
+  <!-- Exact same scripts from index -->
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("show-dropdown");
+    }
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
+
+

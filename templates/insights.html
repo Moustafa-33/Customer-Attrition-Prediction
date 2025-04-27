@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Business Insights | Churn AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #fdf6ee;
+      font-family: 'Inter', sans-serif;
+      color: #4c3a2d;
+      margin: 0;
+    }
+
+    .page-section {
+      padding: 60px 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: #6b4a35;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #7e6a58;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .feature-card {
+      background: #fffaf5;
+      border: 1px solid #e7d8c9;
+      border-radius: 16px;
+      padding: 30px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #5a4031;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .menu-toggle,
+    .back-button {
+      position: absolute;
+      top: 20px;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: #5f4835;
+      cursor: pointer;
+    }
+
+    .menu-toggle {
+      left: 20px;
+    }
+
+    .back-button {
+      right: 20px;
+    }
+
+    /* Sidebar same as other pages for consistency */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+
+    .show-dropdown {
+      display: flex;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  {% include 'sidebar.html' %}
+
+  <!-- Toggle Buttons -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Page Section -->
+  <section class="page-section">
+    <h1>📈 Business Insights</h1>
+    <p>Gain a deeper understanding of your customers with actionable churn insights designed to drive smarter retention strategies.</p>
+
+    <div class="features">
+      <div class="feature-card">🔍 Identify <strong>high-risk segments</strong> by age, plan, region or tenure.</div>
+      <div class="feature-card">📉 Detect <strong>early churn signals</strong> from behavior and payment history.</div>
+      <div class="feature-card">🎯 Trigger <strong>automated retention playbooks</strong> for vulnerable accounts.</div>
+      <div class="feature-card">📊 Integrate insights with your <strong>CRM and email workflows</strong>.</div>
+      <div class="feature-card">📬 Visualize churn probability <strong>with interactive dashboards</strong>.</div>
+      <div class="feature-card">🧠 Predict outcomes with <strong>explainable AI</strong> and risk scoring.</div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("show-dropdown");
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
+
+
+

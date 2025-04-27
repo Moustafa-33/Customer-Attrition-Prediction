@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Share Your Testimonial</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <style>
+    .testimonial-form-wrapper {
+      max-width: 720px;
+      margin: 100px auto;
+      padding: 40px;
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 12px 28px var(--shadow);
+    }
+
+    .testimonial-form-wrapper h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-form-wrapper p {
+      text-align: center;
+      color: #7a5e48;
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    form.testimonial-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    form.testimonial-form input,
+    form.testimonial-form textarea {
+      padding: 14px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 100%;
+      background-color: #fdfcfa;
+    }
+
+    form.testimonial-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    form.testimonial-form button {
+      background-color: var(--button);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    form.testimonial-form button:hover {
+      background-color: var(--primary);
+    }
+
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+
+    .show-dropdown {
+      display: flex;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 20px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+
+    .back-button {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <button class="close-btn" onclick="closeMenu()">×</button>
+  <nav>
+    <!-- Home Dropdown -->
+    <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+    <div id="home-submenu" class="dropdown-content">
+      <a href="{{ url_for('index') }}">Main Home</a>
+      <a href="{{ url_for('demo') }}">Demo</a>
+      <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+      <a href="{{ url_for('insights') }}">Insights</a>
+      <a href="{{ url_for('upload_info') }}">Upload Info</a>
+      <a href="{{ url_for('offer') }}">Launch Offer</a>
+      <a href="{{ url_for('benefits') }}">Benefits</a>
+    </div>
+
+    <!-- Dashboard Dropdown -->
+    <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+    <div id="dashboard-submenu" class="dropdown-content">
+      <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+      <a href="{{ url_for('analytics') }}">Analytics</a>
+      <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+    </div>
+
+    <!-- Upload Dropdown -->
+    <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+    <div id="upload-submenu" class="dropdown-content">
+      <a href="{{ url_for('upload') }}">Upload CSV</a>
+      <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+      <a href="{{ url_for('upload_history') }}">Upload History</a>
+      <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+      <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+    </div>
+
+    <!-- Pricing Dropdown -->
+    <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+    <div id="pricing-submenu" class="dropdown-content">
+      <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+      <a href="{{ url_for('checkout') }}">Checkout</a>
+      <a href="{{ url_for('billing') }}">Billing</a>
+    </div>
+
+    <!-- Testimonials Dropdown -->
+    <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+    <div id="testimonials-submenu" class="dropdown-content">
+      <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+      <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+    </div>
+
+    <!-- Legal + Contact -->
+    <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+    <a href="{{ url_for('contact') }}">📞 Contact</a>
+
+    <!-- Auth -->
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('logout') }}">🔓 Logout</a>
+    {% else %}
+      <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+      <a href="{{ url_for('login') }}">🔑 Login</a>
+    {% endif %}
+  </nav>
+</aside>
+
+<script>
+  function openMenu() {
+    document.getElementById("sidebar").classList.add("open");
+  }
+  function closeMenu() {
+    document.getElementById("sidebar").classList.remove("open");
+  }
+  function toggleDropdown(id) {
+    document.getElementById(id).classList.toggle("show-dropdown");
+  }
+  function goBack() {
+    window.history.back();
+  }
+</script>
+
+  <!-- Toggle Button -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Form Section -->
+  <section class="testimonial-form-wrapper">
+    <h1>💬 Share Your Experience</h1>
+    <p>We'd love to hear how Churn AI has helped your business — but only if you'd like to share. 💛</p>
+
+    <form action="{{ url_for('submit_testimonials') }}" method="post" class="testimonial-form">
+      <input type="text" name="name" placeholder="Your Name (e.g. Priya Kapoor)" required>
+      <input type="text" name="role" placeholder="Your Role & Company (e.g. CEO at RetailPro)" required>
+      <textarea name="quote" placeholder="What would you like to say about Churn AI?" required></textarea>
+      <button type="submit">📣 Submit Testimonial</button>
+    </form>
+  </section>
+
+  <!-- Scripts -->
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+
+    function toggleDropdown() {
+      document.getElementById("home-submenu").classList.toggle("show-dropdown");
+    }
+
+    function toggleTestimonialDropdown() {
+      document.getElementById("testimonial-submenu").classList.toggle("show-dropdown");
+    }
+  </script>
+
+</body>
+</html>
+
+

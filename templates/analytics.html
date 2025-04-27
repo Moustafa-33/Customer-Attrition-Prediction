@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Churn Analytics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Your existing analytics page styles */
+    .page-section {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .analytics-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .subtitle {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    /* Exact sidebar styles from index */
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+    .show-dropdown {
+      display: flex;
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 20px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+    .back-button {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Exact same sidebar from index -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <!-- Home Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <div id="home-submenu" class="dropdown-content">
+        <a href="{{ url_for('index') }}">Main Home</a>
+        <a href="{{ url_for('demo') }}">Demo</a>
+        <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+        <a href="{{ url_for('insights') }}">Insights</a>
+        <a href="{{ url_for('upload_info') }}">Upload Info</a>
+        <a href="{{ url_for('offer') }}">Launch Offer</a>
+        <a href="{{ url_for('benefits') }}">Benefits</a>
+      </div>
+      <!-- Dashboard Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <div id="dashboard-submenu" class="dropdown-content">
+        <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+        <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+      </div>
+      <!-- Upload Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <div id="upload-submenu" class="dropdown-content">
+        <a href="{{ url_for('upload') }}">Upload CSV</a>
+        <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+        <a href="{{ url_for('upload_history') }}">Upload History</a>
+        <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+        <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+      </div>
+      <!-- Pricing Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <div id="pricing-submenu" class="dropdown-content">
+        <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+        <a href="{{ url_for('checkout') }}">Checkout</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+      </div>
+      <!-- Testimonials Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <div id="testimonials-submenu" class="dropdown-content">
+        <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+        <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+      </div>
+      <!-- Legal + Contact -->
+      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <!-- Auth -->
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+
+  <!-- Toggle Button -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- Back Button -->
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Your existing analytics content -->
+  <main class="page-section">
+    <h1>📊 Churn Analytics</h1>
+    <p class="subtitle">Explore AI-powered visual insights from your customer data.</p>
+    <div class="analytics-grid">
+      <div class="analytics-card">
+        <h3>📉 Overall Churn Rate</h3>
+        <p><strong>12.4%</strong> of customers predicted to churn.</p>
+      </div>
+      <div class="analytics-card">
+        <h3>🧠 Top Predictive Features</h3>
+        <ul>
+          <li>📆 Customer Tenure</li>
+          <li>📞 Support Tickets</li>
+          <li>💳 Late Payments</li>
+        </ul>
+      </div>
+      <div class="analytics-card">
+        <h3>📂 Risk Breakdown by Segment</h3>
+        <p>Visualize churn distribution by age group, location, plan tier, and more.</p>
+      </div>
+      <div class="analytics-card">
+        <h3>📈 Feature Impact Analysis</h3>
+        <p>See how each variable influences churn predictions with interactive importance charts.</p>
+      </div>
+      <div class="analytics-card">
+        <h3>🛡️ Retention Strategy Insights</h3>
+        <p>Discover the best strategies to reduce churn based on behavioral triggers.</p>
+      </div>
+      <div class="analytics-card">
+        <h3>📥 Export & Action</h3>
+        <p>Export insights and integrate them into your CRM or customer journey mapping tools.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Exact same scripts from index -->
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("show-dropdown");
+    }
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
+
+

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exclusive Launch Offer | Luxury Churn AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fdf8f4;
+      color: #3a2e2a;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page-section {
+      max-width: 800px;
+      margin: 100px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #5c4331;
+    }
+
+    ul {
+      text-align: left;
+      padding-left: 0;
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    ul li {
+      padding: 10px 0;
+      font-size: 1rem;
+      position: relative;
+      padding-left: 28px;
+    }
+
+    ul li::before {
+      content: '✅';
+      position: absolute;
+      left: 0;
+      top: 8px;
+    }
+
+    .offer-container {
+      background: #fff;
+      padding: 30px;
+      margin-top: 40px;
+      border: 1px dashed #c8b6ac;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.05);
+    }
+
+    .pro-container {
+      background: #fff;
+      padding: 30px;
+      margin-top: 60px;
+      border: 1px solid #eadfd4;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .try-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #5d4037;
+      color: #fff;
+      padding: 12px 28px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .try-btn:hover {
+      background: #3a261f;
+    }
+
+    .muted-text {
+      color: #7a5e52;
+      font-size: 0.9rem;
+    }
+
+    /* Sidebar + Dropdown */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+
+    .dropdown-content {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+
+    .show-dropdown {
+      max-height: 500px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 1000;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu Toggle and Back Button -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <a onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <div id="home-submenu" class="dropdown-content">
+        <a href="{{ url_for('index') }}">Main Home</a>
+        <a href="{{ url_for('demo') }}">Demo</a>
+        <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+        <a href="{{ url_for('insights') }}">Insights</a>
+        <a href="{{ url_for('upload_info') }}">Upload Info</a>
+        <a href="{{ url_for('offer') }}">Launch Offer</a>
+        <a href="{{ url_for('benefits') }}">Benefits</a>
+      </div>
+
+      <a onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <div id="dashboard-submenu" class="dropdown-content">
+        <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+        <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+      </div>
+
+      <a onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <div id="upload-submenu" class="dropdown-content">
+        <a href="{{ url_for('upload') }}">Upload CSV</a>
+        <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+        <a href="{{ url_for('upload_history') }}">Upload History</a>
+        <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+        <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+      </div>
+
+      <a onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <div id="pricing-submenu" class="dropdown-content">
+        <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+        <a href="{{ url_for('checkout') }}">Checkout</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+      </div>
+
+      <a onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <div id="testimonials-submenu" class="dropdown-content">
+        <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+        <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+      </div>
+
+      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+
+  <!-- Main Offer Content -->
+  <section class="page-section">
+    <h1>🎉 Exclusive Launch Offer</h1>
+    <p>🚀 Take your customer retention to the next level.</p>
+    <p>Sign up today and get <strong>20% off</strong> your first 3 months of <strong>Churn AI Pro</strong> — our most advanced churn prediction platform yet.</p>
+
+    <div class="offer-container">
+      <h2>🧳 What’s Included</h2>
+      <ul>
+        <li>Full access to the interactive analytics dashboard</li>
+        <li>AI-powered churn prediction with CSV upload</li>
+        <li>Personalized business insights for retention</li>
+        <li>Priority support & dedicated onboarding</li>
+        <li>Unlimited prediction runs per month</li>
+      </ul>
+      <a href="{{ url_for('signup') }}" class="try-btn">Claim Your Offer</a>
+      <p class="muted-text">Offer valid until <strong>April 10th, 2025</strong>. No credit card required to sign up.</p>
+    </div>
+
+    <div class="pro-container">
+      <h2>💡 Why Churn AI Pro?</h2>
+      <p style="max-width: 700px; margin: 16px auto;">
+        Churn AI Pro is built for growing businesses that want to stop guessing and start acting on real customer behavior. Our powerful algorithms predict churn risk before it happens — helping you reduce loss and boost loyalty.
+      </p>
+      <ul>
+        <li>📊 <strong>95%+ prediction accuracy</strong> using machine learning</li>
+        <li>⚙️ <strong>Real-time insights</strong> with no coding required</li>
+        <li>🌐 <strong>Perfect for SaaS, eCommerce, or B2B industries</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sidebar Scripts -->
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function toggleDropdown(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle("show-dropdown");
+    }
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

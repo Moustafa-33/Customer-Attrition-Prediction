@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Billing & Subscription</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f7f7;
+    }
+    .billing-box {
+      max-width: 720px;
+      margin: 100px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+    .billing-box h2 {
+      color: #5d3b2e;
+      margin-bottom: 20px;
+    }
+    .billing-section {
+      margin-top: 30px;
+      padding: 20px 0;
+      border-top: 1px solid #eee;
+    }
+    .billing-section p {
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+    .billing-actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 16px;
+    }
+    .billing-actions a {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn-outline {
+      border: 2px solid #5d3b2e;
+      color: #5d3b2e;
+    }
+    .btn-primary {
+      background: #5d3b2e;
+      color: #fff;
+    }
+    .invoice-list {
+      margin-top: 10px;
+    }
+    .invoice-list li {
+      margin-bottom: 8px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+    }
+    .modal-content h3 {
+      margin-bottom: 16px;
+      color: #5d3b2e;
+    }
+    .modal-content button {
+      margin-top: 16px;
+      padding: 10px 16px;
+      border: none;
+      background: #5d3b2e;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Sidebar & Dropdowns */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+    .dropdown-content {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+    }
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+    .show-dropdown {
+      max-height: 500px;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 20px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+    .back-button {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <a onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <div id="home-submenu" class="dropdown-content">
+        <a href="{{ url_for('index') }}">Main Home</a>
+        <a href="{{ url_for('demo') }}">Demo</a>
+        <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+        <a href="{{ url_for('insights') }}">Insights</a>
+        <a href="{{ url_for('upload_info') }}">Upload Info</a>
+        <a href="{{ url_for('offer') }}">Launch Offer</a>
+        <a href="{{ url_for('benefits') }}">Benefits</a>
+      </div>
+
+      <a onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <div id="dashboard-submenu" class="dropdown-content">
+        <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+        <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+      </div>
+
+      <a onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <div id="upload-submenu" class="dropdown-content">
+        <a href="{{ url_for('upload') }}">Upload CSV</a>
+        <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+        <a href="{{ url_for('upload_history') }}">Upload History</a>
+        <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+        <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+      </div>
+
+      <a onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <div id="pricing-submenu" class="dropdown-content">
+        <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+        <a href="{{ url_for('checkout') }}">Checkout</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+      </div>
+
+      <a onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <div id="testimonials-submenu" class="dropdown-content">
+        <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+        <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+      </div>
+
+      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+
+  <!-- Menu and Back Buttons -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Main Billing Section -->
+  <section class="billing-box">
+    <h2>💳 Your Subscription</h2>
+
+    <div class="billing-section">
+      <p><strong>Plan:</strong> Business</p>
+      <p><strong>Price:</strong> $99/month</p>
+      <p><strong>Billing Cycle:</strong> Monthly</p>
+      <p><strong>Next Billing Date:</strong> April 10, 2025</p>
+    </div>
+
+    <div class="billing-section">
+      <p><strong>Card on File:</strong> **** **** **** 4242</p>
+      <p><strong>Billing Email:</strong> you@example.com</p>
+    </div>
+
+    <div class="billing-actions">
+      <a href="{{ url_for('pricing') }}" class="btn-outline">Change Plan</a>
+      <a href="#" class="btn-primary" onclick="showSuccessModal()">Update Payment</a>
+    </div>
+
+    <div class="billing-section">
+      <h3>📄 Invoices</h3>
+      <ul class="invoice-list">
+        <li><a href="#">March 2025 - Download PDF</a></li>
+        <li><a href="#">February 2025 - Download PDF</a></li>
+        <li><a href="#">January 2025 - Download PDF</a></li>
+      </ul>
+    </div>
+
+    <div class="billing-section" style="margin-top: 40px;">
+      <p>📞 Need help with billing? <a href="{{ url_for('contact') }}">Contact Support</a></p>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <h3>✅ Payment Info Updated</h3>
+      <p>Your billing details were successfully updated.</p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function toggleDropdown(id) {
+      const dropdown = document.getElementById(id);
+      dropdown.classList.toggle("show-dropdown");
+    }
+    function goBack() {
+      window.history.back();
+    }
+    function showSuccessModal() {
+      document.getElementById("successModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("successModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>

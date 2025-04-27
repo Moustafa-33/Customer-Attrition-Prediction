@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Privacy & Security | Churn AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Your existing privacy page styles */
+    body {
+      background: #fdf7f0;
+      font-family: 'Inter', sans-serif;
+      color: #4c3a2d;
+    }
+    .page-section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 50px;
+      background: #fffdf9;
+      border-radius: 18px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e8d9ca;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #6a422b;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: #7c624c;
+      margin-bottom: 30px;
+    }
+    .evaluation-box {
+      background: #fef9f4;
+      border: 1px solid #e7d8c9;
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+    }
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .checklist li {
+      padding-left: 36px;
+      position: relative;
+      margin-bottom: 18px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .checklist li::before {
+      content: "✅";
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      color: #4a382c;
+    }
+    .try-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #a66b4d, #84533b);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(166, 107, 77, 0.2);
+    }
+    .try-btn:hover {
+      background: linear-gradient(135deg, #84533b, #5e3c2a);
+      box-shadow: 0 6px 18px rgba(110, 61, 43, 0.3);
+    }
+    .menu-toggle,
+    .back-button {
+      position: absolute;
+      top: 20px;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: #5f4835;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      left: 20px;
+    }
+    .back-button {
+      right: 20px;
+    }
+
+    /* Exact sidebar styles from index */
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+    .show-dropdown {
+      display: flex;
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 20px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+    .back-button {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Exact same sidebar from index -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <!-- Home Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <div id="home-submenu" class="dropdown-content">
+        <a href="{{ url_for('index') }}">Main Home</a>
+        <a href="{{ url_for('demo') }}">Demo</a>
+        <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+        <a href="{{ url_for('insights') }}">Insights</a>
+        <a href="{{ url_for('upload_info') }}">Upload Info</a>
+        <a href="{{ url_for('offer') }}">Launch Offer</a>
+        <a href="{{ url_for('benefits') }}">Benefits</a>
+      </div>
+      <!-- Dashboard Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <div id="dashboard-submenu" class="dropdown-content">
+        <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+        <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+      </div>
+      <!-- Upload Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <div id="upload-submenu" class="dropdown-content">
+        <a href="{{ url_for('upload') }}">Upload CSV</a>
+        <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+        <a href="{{ url_for('upload_history') }}">Upload History</a>
+        <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+        <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+      </div>
+      <!-- Pricing Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <div id="pricing-submenu" class="dropdown-content">
+        <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+        <a href="{{ url_for('checkout') }}">Checkout</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+      </div>
+      <!-- Testimonials Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <div id="testimonials-submenu" class="dropdown-content">
+        <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+        <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+      </div>
+      <!-- Legal + Contact -->
+      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <!-- Auth -->
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+
+  <!-- Toggle Button -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- Back Button -->
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Your existing privacy content -->
+  <section class="page-section">
+    <h1>🔐 Data Privacy & Security</h1>
+    <p class="subtitle">Your trust is our top priority. Here's how we protect your customer data at every stage:</p>
+
+    <div class="evaluation-box">
+      <ul class="checklist">
+        <li>End-to-end AES-256 encryption for all data in transit and at rest</li>
+        <li>Strict role-based access control for internal team members (RBAC)</li>
+        <li>We never share or sell any data to third parties — ever</li>
+        <li>Uploaded files are deleted <strong>automatically</strong> 24 hours post-analysis</li>
+        <li>GDPR and CCPA compliant with audit-ready processing standards</li>
+        <li>Secure cloud infrastructure hosted on SOC 2 Type II certified environments</li>
+      </ul>
+    </div>
+
+    <a href="{{ url_for('contact') }}" class="try-btn">📞 Contact Us with Privacy Questions</a>
+  </section>
+
+  <!-- Exact same scripts from index -->
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("show-dropdown");
+    }
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
+
+

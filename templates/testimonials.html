@@ -1,0 +1,340 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonials | Churn AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <style>
+    .hero-title {
+      text-align: center;
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-top: 100px;
+    }
+
+    .testimonials-section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      padding: 32px;
+      border-radius: 18px;
+      box-shadow: 0 12px 28px var(--shadow);
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .testimonial-card:nth-child(odd) {
+      animation-delay: 0.2s;
+    }
+
+    .testimonial-card:nth-child(even) {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .testimonial-quote {
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #5C4430;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      margin-top: 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+
+    .testimonial-meta {
+      font-size: 0.85rem;
+      color: #a48b77;
+      margin-top: 6px;
+    }
+
+    .company-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+
+    .show-dropdown {
+      display: flex;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 20px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+
+    .back-button {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <!-- Home Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <div id="home-submenu" class="dropdown-content">
+        <a href="{{ url_for('index') }}">Main Home</a>
+        <a href="{{ url_for('demo') }}">Demo</a>
+        <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+        <a href="{{ url_for('insights') }}">Insights</a>
+        <a href="{{ url_for('upload_info') }}">Upload Info</a>
+        <a href="{{ url_for('offer') }}">Launch Offer</a>
+        <a href="{{ url_for('benefits') }}">Benefits</a>
+      </div>
+  
+      <!-- Dashboard Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <div id="dashboard-submenu" class="dropdown-content">
+        <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+        <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+      </div>
+  
+      <!-- Upload Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <div id="upload-submenu" class="dropdown-content">
+        <a href="{{ url_for('upload') }}">Upload CSV</a>
+        <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+        <a href="{{ url_for('upload_history') }}">Upload History</a>
+        <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+        <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+      </div>
+  
+      <!-- Pricing Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <div id="pricing-submenu" class="dropdown-content">
+        <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+        <a href="{{ url_for('checkout') }}">Checkout</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+      </div>
+  
+      <!-- Testimonials Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <div id="testimonials-submenu" class="dropdown-content">
+        <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+        <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+      </div>
+  
+      <!-- Legal + Contact -->
+      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+  
+      <!-- Auth -->
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+  
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("show-dropdown");
+    }
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+  
+  <!-- Add this to your <script> section -->
+  <script>
+    function toggleDropdown() {
+      document.getElementById("home-submenu").classList.toggle("show-dropdown");
+    }
+  
+    function toggleTestimonialDropdown() {
+      document.getElementById("testimonial-submenu").classList.toggle("show-dropdown");
+    }
+  
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+  
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+  
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+  
+
+  <!-- Toggle Button -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- Back Button -->
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <h1 class="hero-title">🗣️ What Businesses Say About Us</h1>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Logo_RetailPro.png/120px-Logo_RetailPro.png" alt="RetailPro" class="company-logo">
+        <p class="testimonial-quote">“Churn AI helped us reduce customer churn by 45%! The insights were invaluable.”</p>
+        <p class="testimonial-author">John Smith</p>
+        <p class="testimonial-meta">CEO at RetailPro • March 2025</p>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/SaaSify_logo.png/120px-SaaSify_logo.png" alt="SaaSify" class="company-logo">
+        <p class="testimonial-quote">“A game-changer for our SaaS business. We saw an 80% increase in retention rates!”</p>
+        <p class="testimonial-author">Sarah Davis</p>
+        <p class="testimonial-meta">Growth Lead at SaaSify • February 2025</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">“We’ve never had more visibility into customer behavior. This changed everything for us.”</p>
+        <p class="testimonial-author">Priya Kapoor</p>
+        <p class="testimonial-meta">Head of Insights, MetricWave • February 2025</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">“From guessing to knowing. Our churn dropped 33% in 3 months.”</p>
+        <p class="testimonial-author">David Chen</p>
+        <p class="testimonial-meta">VP Product, Finlytix • January 2025</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">“If you care about retention, Churn AI is a must. Beautiful UI, powerful tools.”</p>
+        <p class="testimonial-author">Helena Moore</p>
+        <p class="testimonial-meta">Founder at BloomCRM • December 2024</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">“The priority alerts and trend insights are unmatched. We act faster than ever.”</p>
+        <p class="testimonial-author">Adeel Farhan</p>
+        <p class="testimonial-meta">Chief Data Officer, QuantEdge • November 2024</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+
+    function toggleDropdown() {
+      document.getElementById("home-submenu").classList.toggle("show-dropdown");
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
+
+

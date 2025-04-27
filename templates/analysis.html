@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Churn Analysis Results | Luxury Churn AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Sidebar -->
+{% include 'sidebar.html' %}
+
+<!-- Back Button -->
+<a href="{{ url_for('upload') }}" class="back-button" style="margin: 10px 15px;">← Back to Upload</a>
+
+<section class="analysis-wrapper fade-in" style="max-width: 1200px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 1.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+  <!-- Header -->
+  <h1 style="font-size: 2rem; margin-bottom: 1rem; text-align: center;">
+    🔍 Churn Analysis Results
+  </h1>
+  <p style="text-align: center; font-size: 1rem; color: #666; margin-bottom: 2rem;">
+    Here's what we found based on your uploaded customer data.
+  </p>
+
+  <!-- Flash Messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Churn Summary -->
+  {% if churn_percentage %}
+    <div class="summary-box glassmorphism fade-in" style="margin-bottom: 2rem;">
+      <h2>📈 Churn Summary</h2>
+      <p><strong>{{ churn_percentage }}%</strong> of customers are predicted to churn.</p>
+    </div>
+  {% endif %}
+
+  <!-- Key Drivers -->
+  {% if explanation %}
+    <div class="explanation-box fade-in" style="margin-bottom: 2rem;">
+      <h2>💡 Top Churn Drivers</h2>
+      <pre style="background: #f9f9f9; padding: 1rem; border-radius: 0.5rem; white-space: pre-wrap;">{{ explanation }}</pre>
+    </div>
+  {% endif %}
+
+  <!-- Table -->
+  {% if table %}
+    <div class="prediction-results fade-in" style="margin-bottom: 2rem;">
+      <h2 style="text-align: center;">🔮 Prediction Breakdown</h2>
+      <div class="luxury-table" style="overflow-x: auto;">
+        {{ table|safe }}
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Chart + Download -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
+    {% if download_link %}
+      <div class="export-section fade-in" style="text-align: center;">
+        <a href="{{ download_link }}" class="lux-button">⬇️ Download CSV</a>
+        <p style="font-size: 0.85rem; color: #666; margin-top: 8px;">Includes predictions and confidence scores.</p>
+      </div>
+    {% endif %}
+
+    {% if chart_path %}
+      <div class="chart-section fade-in" style="text-align: center;">
+        <img src="{{ chart_path }}" alt="Churn Chart" style="max-width: 320px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+</body>
+</html>
+
+

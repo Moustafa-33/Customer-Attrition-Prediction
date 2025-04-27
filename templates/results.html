@@ -1,0 +1,105 @@
+
+
+
+
+<!-- Fonts, Icons, Animations -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+<div class="container py-5" style="font-family: 'Open Sans', sans-serif;">
+
+  <!-- Main Card -->
+  <div class="card shadow-lg border-0 p-4 rounded-4 bg-white" data-aos="fade-up">
+    <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif; color: #3c2a21;">
+      <i class="fa-solid fa-chart-line me-2"></i>Customer Churn Prediction Results
+    </h2>
+
+    <!-- Churn Summary -->
+    <div class="text-center mb-4">
+      <h5 class="text-danger fw-bold">Predicted Churn Rate: {{ churn_percentage }}%</h5>
+    </div>
+
+    <!-- Chart -->
+    {% if chart_path %}
+    <div class="text-center mb-5" data-aos="zoom-in">
+      <img src="{{ chart_path }}" class="img-fluid rounded-3 shadow-sm" style="max-width: 300px;" alt="Churn Breakdown Chart">
+    </div>
+    {% endif %}
+
+    <!-- Results Table -->
+    {% if table %}
+    <div class="table-responsive mb-4" data-aos="fade-up">
+      <div class="alert alert-light border shadow-sm">
+        {{ table | safe }}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Retention Strategies -->
+    {% if retention_strategies %}
+    <div class="mb-5" data-aos="fade-up">
+      <h4 class="mb-3 text-dark"><i class="fa-solid fa-bullseye me-2"></i>Recommended Retention Strategies</h4>
+      <ul class="list-group list-group-flush">
+        {% for strategy in retention_strategies %}
+        <li class="list-group-item">
+          <i class="fa-solid fa-check text-success me-2"></i>{{ strategy }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- Top Risk Customers -->
+    {% if top_customers %}
+    <div class="mb-5" data-aos="fade-up">
+      <h4 class="mb-3 text-dark"><i class="fa-solid fa-user-shield me-2"></i>Top Customers at Risk</h4>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Prediction</th>
+              <th>Confidence (%)</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for customer in top_customers %}
+            <tr>
+              <td>{{ customer['CustomerID'] }}</td>
+              <td>{{ customer['Prediction'] }}</td>
+              <td>{{ customer['Confidence'] }}</td>
+              <td>{{ customer['Reason'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Download Buttons -->
+    <div class="text-center mt-4" data-aos="fade-up">
+      {% if download_link %}
+      <a href="{{ download_link }}" class="btn btn-dark me-3 px-4 py-2 rounded-pill shadow-sm">
+        <i class="fa-solid fa-file-csv me-2"></i>Download CSV
+      </a>
+      {% endif %}
+      {% if pdf_link %}
+      <a href="{{ pdf_link }}" class="btn btn-outline-danger px-4 py-2 rounded-pill shadow-sm">
+        <i class="fa-solid fa-file-pdf me-2"></i>Download PDF Report
+      </a>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+<!-- AOS Animation -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000 });
+</script>
+
+

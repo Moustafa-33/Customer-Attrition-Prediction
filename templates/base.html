@@ -1,0 +1,78 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}My Website{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <a href="{{ url_for('index') }}">🏠 Home</a>
+      <a href="{{ url_for('demo') }}">🚀 Demo</a>
+      <a href="{{ url_for('accuracy') }}">📊 Accuracy</a>
+      <a href="{{ url_for('insights') }}">🧠 Insights</a>
+      <a href="{{ url_for('upload_info') }}">📁 Upload Info</a>
+      <a href="{{ url_for('offer') }}">🎁 Launch Offer</a>
+      <a href="{{ url_for('benefits') }}">🏆 Benefits</a>
+
+      <a href="{{ url_for('dashboard') }}">📈 Dashboard</a>
+      <a href="{{ url_for('analysis') }}">📉 Analysis</a>
+      <a href="{{ url_for('analytics') }}">📊 Analytics</a>
+      <a href="{{ url_for('playbooks') }}">📚 Playbooks</a>
+
+      <a href="{{ url_for('upload') }}">📤 Upload CSV</a>
+      <a href="{{ url_for('upload_guidelines') }}">📄 Upload Guidelines</a>
+      <a href="{{ url_for('upload_history') }}">🕘 Upload History</a>
+      <a href="{{ url_for('upload_troubleshooting') }}">🛠️ Troubleshooting</a>
+
+      <a href="{{ url_for('pricing') }}">💰 Pricing</a>
+      <a href="{{ url_for('checkout') }}">🛒 Checkout</a>
+      <a href="{{ url_for('billing') }}">💳 Billing</a>
+
+      <a href="{{ url_for('testimonials') }}">🗣️ Testimonials</a>
+      <a href="{{ url_for('submit_testimonials') }}">➕ Submit Testimonial</a>
+
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <a href="{{ url_for('data_privacy') }}">📜 Privacy</a>
+
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+  </script>
+</body>
+</html>

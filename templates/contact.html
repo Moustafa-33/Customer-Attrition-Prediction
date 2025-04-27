@@ -1,0 +1,281 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & Support</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <style>
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+
+    .show-dropdown {
+      display: flex;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 20px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+
+    .back-button {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .contact-section {
+      max-width: 700px;
+      margin: 100px auto;
+      padding: 40px;
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 12px 28px var(--shadow);
+      text-align: center;
+    }
+
+    .contact-section h1 {
+      font-size: 2.6rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .contact-section p {
+      font-size: 1.05rem;
+      color: #7A5E48;
+      margin-bottom: 30px;
+    }
+
+    .contact-section form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-section input,
+    .contact-section textarea {
+      padding: 14px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 100%;
+      resize: vertical;
+    }
+
+    .contact-section textarea {
+      min-height: 120px;
+    }
+
+    .contact-section button {
+      background: var(--button);
+      color: var(--white);
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .contact-section button:hover {
+      background: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .contact-section {
+        margin: 60px 20px;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <!-- Home Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <div id="home-submenu" class="dropdown-content">
+        <a href="{{ url_for('index') }}">Main Home</a>
+        <a href="{{ url_for('demo') }}">Demo</a>
+        <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+        <a href="{{ url_for('insights') }}">Insights</a>
+        <a href="{{ url_for('upload_info') }}">Upload Info</a>
+        <a href="{{ url_for('offer') }}">Launch Offer</a>
+        <a href="{{ url_for('benefits') }}">Benefits</a>
+      </div>
+  
+      <!-- Dashboard Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <div id="dashboard-submenu" class="dropdown-content">
+        <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+        <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+      </div>
+  
+      <!-- Upload Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <div id="upload-submenu" class="dropdown-content">
+        <a href="{{ url_for('upload') }}">Upload CSV</a>
+        <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+        <a href="{{ url_for('upload_history') }}">Upload History</a>
+        <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+        <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+      </div>
+  
+      <!-- Pricing Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <div id="pricing-submenu" class="dropdown-content">
+        <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+        <a href="{{ url_for('checkout') }}">Checkout</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+      </div>
+  
+      <!-- Testimonials Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <div id="testimonials-submenu" class="dropdown-content">
+        <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+        <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+      </div>
+  
+      <!-- Legal + Contact -->
+      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+  
+      <!-- Auth -->
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+  
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("show-dropdown");
+    }
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+  
+
+  <!-- Toggle Button -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- Back Button -->
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Elegant Contact Section -->
+  <section class="contact-section">
+    <h1>📞 Get in Touch</h1>
+    <p>Have a question? Need support? Contact us!</p>
+    <form action="/contact" method="post">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+
+    function toggleDropdown() {
+      document.getElementById("home-submenu").classList.toggle("show-dropdown");
+    }
+  </script>
+
+</body>
+</html>
+
+

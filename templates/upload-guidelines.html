@@ -1,0 +1,272 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Guidelines | Churn AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Your existing upload guidelines styles */
+    body {
+      background: #fdfaf6;
+      font-family: 'Inter', sans-serif;
+      color: #443322;
+      margin: 0;
+    }
+    .page-section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 40px;
+      background: #fffefc;
+      border-radius: 24px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e9ded1;
+    }
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 10px;
+      color: #5d3b2e;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #7e6755;
+      margin-bottom: 35px;
+    }
+    .upload-info-box {
+      background: #fefaf6;
+      padding: 30px 40px;
+      border-radius: 20px;
+      border: 1px solid #ebdfd2;
+      box-shadow: inset 0 1px 0 #fff;
+    }
+    .upload-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .upload-list li {
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+      padding-left: 40px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .upload-list li::before {
+      content: '✔️';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 1.2rem;
+      color: #7b4b32;
+    }
+    .try-btn {
+      margin-top: 40px;
+      display: inline-block;
+      background: linear-gradient(145deg, #6a4c37, #523b2b);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(106, 76, 55, 0.3);
+      transition: all 0.3s ease;
+    }
+    .try-btn:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(145deg, #523b2b, #402d21);
+    }
+    @media (max-width: 768px) {
+      .page-section {
+        margin: 30px 20px;
+        padding: 30px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .subtitle {
+        font-size: 1rem;
+      }
+      .try-btn {
+        padding: 12px 24px;
+      }
+    }
+
+    /* Exact sidebar styles from index */
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      margin-left: 20px;
+    }
+    .dropdown-content a {
+      padding: 6px 0;
+      font-size: 0.95rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .dropdown-content a:hover {
+      color: var(--accent);
+    }
+    .show-dropdown {
+      display: flex;
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #3B2E2A;
+      padding: 24px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+    .sidebar nav a {
+      display: block;
+      margin: 10px 0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .sidebar nav a:hover {
+      color: var(--accent);
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin: 20px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+    .back-button {
+      margin: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Exact same sidebar from index -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">×</button>
+    <nav>
+      <!-- Home Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <div id="home-submenu" class="dropdown-content">
+        <a href="{{ url_for('index') }}">Main Home</a>
+        <a href="{{ url_for('demo') }}">Demo</a>
+        <a href="{{ url_for('accuracy') }}">Model Accuracy</a>
+        <a href="{{ url_for('insights') }}">Insights</a>
+        <a href="{{ url_for('upload_info') }}">Upload Info</a>
+        <a href="{{ url_for('offer') }}">Launch Offer</a>
+        <a href="{{ url_for('benefits') }}">Benefits</a>
+      </div>
+      <!-- Dashboard Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <div id="dashboard-submenu" class="dropdown-content">
+        <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
+        <a href="{{ url_for('analytics') }}">Analytics</a>
+        <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
+      </div>
+      <!-- Upload Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <div id="upload-submenu" class="dropdown-content">
+        <a href="{{ url_for('upload') }}">Upload CSV</a>
+        <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
+        <a href="{{ url_for('upload_history') }}">Upload History</a>
+        <a href="{{ url_for('upload_checkpoint') }}">Upload Checkpoint</a>
+        <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
+      </div>
+      <!-- Pricing Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <div id="pricing-submenu" class="dropdown-content">
+        <a href="{{ url_for('pricing') }}">Pricing Plans</a>
+        <a href="{{ url_for('checkout') }}">Checkout</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+      </div>
+      <!-- Testimonials Dropdown -->
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <div id="testimonials-submenu" class="dropdown-content">
+        <a href="{{ url_for('testimonials') }}">User Testimonials</a>
+        <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
+      </div>
+      <!-- Legal + Contact -->
+      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
+      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <!-- Auth -->
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
+        <a href="{{ url_for('login') }}">🔑 Login</a>
+      {% endif %}
+    </nav>
+  </aside>
+
+  <!-- Toggle Button -->
+  <button class="menu-toggle" onclick="openMenu()">☰</button>
+
+  <!-- Back Button -->
+  <a href="javascript:void(0);" onclick="goBack()" class="back-button">← Back</a>
+
+  <!-- Your existing upload guidelines content -->
+  <section class="page-section">
+    <h1>📂 Upload Guidelines</h1>
+    <p class="subtitle">To ensure precise churn predictions and smooth integration, please follow these carefully curated upload rules:</p>
+
+    <div class="upload-info-box">
+      <ul class="upload-list">
+        <li>Upload a <strong>CSV file</strong> formatted with clean, structured data only.</li>
+        <li>Ensure a <strong>unique User ID</strong> is included in your dataset.</li>
+        <li>Include <strong>login frequency</strong>, <strong>engagement time</strong>, and <strong>subscription type</strong> as columns.</li>
+        <li>Remove all <strong>PII</strong> (names, emails, phone numbers, etc.) before uploading.</li>
+        <li>Keep file size under <strong>10MB</strong> for optimal performance and processing speed.</li>
+      </ul>
+    </div>
+
+    <a href="{{ url_for('upload') }}" class="try-btn">⬆️ Go to Upload Page</a>
+  </section>
+
+  <!-- Exact same scripts from index -->
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("open");
+    }
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("show-dropdown");
+    }
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
+
+
