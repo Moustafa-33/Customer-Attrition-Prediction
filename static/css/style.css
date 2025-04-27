@@ -1,4 +1,4 @@
-/* style.css - Restored Original Color Scheme + Additional Pages Support */
+/* style.css - COLOR SCHEME */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -358,7 +358,7 @@ body {
 }
 .offer-container button:hover {
     background: var(--button);
-}/* Smooth Dropdown Transition */
+}/* Dropdown Transition */
 .dropdown-content {
     transition: max-height 0.3s ease, opacity 0.3s ease;
     overflow: hidden;
@@ -378,7 +378,7 @@ body {
     padding-left: 10px;
   }
   
-  /* Tooltip for icons (optional enhancements) */
+  /* Tooltip for icons */
   .sidebar nav a::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -443,7 +443,7 @@ body {
     animation: fadeInOut 5s ease-in-out forwards;
   }
   
-  /* Add scroll smoothness */
+  /* scroll smoothness */
   html {
     scroll-behavior: smooth;
   }.subtitle {
@@ -750,7 +750,7 @@ body {
     text-decoration: underline;
   }
   
-  /* Success Modal */
+  /* Success Model */
   .modal {
     display: none;
     position: fixed;
