@@ -156,7 +156,7 @@
     <button class="close-btn" onclick="closeMenu()">×</button>
     <nav>
       <!-- Home Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')"> Home ▼</a>
       <div id="home-submenu" class="dropdown-content">
         <a href="{{ url_for('index') }}">Main Home</a>
         <a href="{{ url_for('demo') }}">Demo</a>
@@ -167,14 +167,14 @@
         <a href="{{ url_for('benefits') }}">Benefits</a>
       </div>
       <!-- Dashboard Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')"> Dashboard ▼</a>
       <div id="dashboard-submenu" class="dropdown-content">
         <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
         <a href="{{ url_for('analytics') }}">Analytics</a>
         <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
       </div>
       <!-- Upload Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')"> Upload ▼</a>
       <div id="upload-submenu" class="dropdown-content">
         <a href="{{ url_for('upload') }}">Upload CSV</a>
         <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
@@ -183,27 +183,27 @@
         <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
       </div>
       <!-- Pricing Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')"> Pricing ▼</a>
       <div id="pricing-submenu" class="dropdown-content">
         <a href="{{ url_for('pricing') }}">Pricing Plans</a>
         <a href="{{ url_for('checkout') }}">Checkout</a>
         <a href="{{ url_for('billing') }}">Billing</a>
       </div>
       <!-- Testimonials Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')"> Testimonials ▼</a>
       <div id="testimonials-submenu" class="dropdown-content">
         <a href="{{ url_for('testimonials') }}">User Testimonials</a>
         <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
       </div>
       <!-- Legal + Contact -->
-      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
-      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <a href="{{ url_for('data_privacy') }}"> Data Privacy</a>
+      <a href="{{ url_for('contact') }}"> Contact</a>
       <!-- Auth -->
       {% if current_user.is_authenticated %}
-        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+        <a href="{{ url_for('logout') }}"> Logout</a>
       {% else %}
-        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
-        <a href="{{ url_for('login') }}">🔑 Login</a>
+        <a href="{{ url_for('signup') }}"> Sign Up</a>
+        <a href="{{ url_for('login') }}"> Login</a>
       {% endif %}
     </nav>
   </aside>
@@ -216,34 +216,34 @@
 
   <!-- Your existing impact report content -->
   <main class="page-section">
-    <h1>📊 Business Impact Report</h1>
+    <h1> Business Impact Report</h1>
     <p class="subtitle">See how churn is affecting your bottom line — and what you can do about it.</p>
 
     <div class="impact-grid">
       <div class="impact-card">
-        <h3>💸 Revenue Lost to Churn</h3>
+        <h3> Revenue Lost to Churn</h3>
         <p>Over <strong>$58,400</strong> estimated monthly revenue lost due to customer attrition.</p>
       </div>
       <div class="impact-card">
-        <h3>📈 Predictive Accuracy</h3>
+        <h3> Predictive Accuracy</h3>
         <p>Model accuracy: <strong>91.4%</strong><br/> ROC AUC Score: <strong>0.88</strong></p>
       </div>
       <div class="impact-card">
-        <h3>🧠 Smart Retention Segments</h3>
+        <h3> Smart Retention Segments</h3>
         <p>Segmented risk zones: VIP users, monthly billers, and short-tenure churners.</p>
       </div>
       <div class="impact-card">
-        <h3>🧾 Actionable Insights</h3>
+        <h3> Actionable Insights</h3>
         <p>45% of churners had <em>3+ late payments</em> and <em>contract length < 6 months</em>.</p>
       </div>
     </div>
 
     <div class="divider"></div>
 
-    <h2 style="color:#5a3e28;">📥 Export Your Full Report</h2>
+    <h2 style="color:#5a3e28;"> Export Your Full Report</h2>
     <p class="subtitle">Get your full churn breakdown, financial projections, and recommendations in one file.</p>
 
-    <a href="{{ download_link }}" class="download-btn">⬇️ Download PDF Impact Report</a>
+    <a href="{{ download_link }}" class="download-btn"> Download PDF Impact Report</a>
   </main>
 
   <!-- Exact same scripts from index -->
