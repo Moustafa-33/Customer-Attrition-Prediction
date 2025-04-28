@@ -171,7 +171,7 @@
   <aside class="sidebar" id="sidebar">
     <button class="close-btn" onclick="closeMenu()">×</button>
     <nav>
-      <a onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <a onclick="toggleDropdown('home-submenu')"> Home ▼</a>
       <div id="home-submenu" class="dropdown-content">
         <a href="{{ url_for('index') }}">Main Home</a>
         <a href="{{ url_for('demo') }}">Demo</a>
@@ -182,14 +182,14 @@
         <a href="{{ url_for('benefits') }}">Benefits</a>
       </div>
 
-      <a onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <a onclick="toggleDropdown('dashboard-submenu')"> Dashboard ▼</a>
       <div id="dashboard-submenu" class="dropdown-content">
         <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
         <a href="{{ url_for('analytics') }}">Analytics</a>
         <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
       </div>
 
-      <a onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <a onclick="toggleDropdown('upload-submenu')"> Upload ▼</a>
       <div id="upload-submenu" class="dropdown-content">
         <a href="{{ url_for('upload') }}">Upload CSV</a>
         <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
@@ -198,27 +198,27 @@
         <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
       </div>
 
-      <a onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <a onclick="toggleDropdown('pricing-submenu')"> Pricing ▼</a>
       <div id="pricing-submenu" class="dropdown-content">
         <a href="{{ url_for('pricing') }}">Pricing Plans</a>
         <a href="{{ url_for('checkout') }}">Checkout</a>
         <a href="{{ url_for('billing') }}">Billing</a>
       </div>
 
-      <a onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <a onclick="toggleDropdown('testimonials-submenu')"> Testimonials ▼</a>
       <div id="testimonials-submenu" class="dropdown-content">
         <a href="{{ url_for('testimonials') }}">User Testimonials</a>
         <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
       </div>
 
-      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
-      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <a href="{{ url_for('data_privacy') }}"> Data Privacy</a>
+      <a href="{{ url_for('contact') }}"> Contact</a>
 
       {% if current_user.is_authenticated %}
-        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+        <a href="{{ url_for('logout') }}"> Logout</a>
       {% else %}
-        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
-        <a href="{{ url_for('login') }}">🔑 Login</a>
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+        <a href="{{ url_for('login') }}"> Login</a>
       {% endif %}
     </nav>
   </aside>
@@ -229,7 +229,7 @@
 
   <!-- Main Billing Section -->
   <section class="billing-box">
-    <h2>💳 Your Subscription</h2>
+    <h2> Your Subscription</h2>
 
     <div class="billing-section">
       <p><strong>Plan:</strong> Business</p>
@@ -249,7 +249,7 @@
     </div>
 
     <div class="billing-section">
-      <h3>📄 Invoices</h3>
+      <h3> Invoices</h3>
       <ul class="invoice-list">
         <li><a href="#">March 2025 - Download PDF</a></li>
         <li><a href="#">February 2025 - Download PDF</a></li>
@@ -258,14 +258,14 @@
     </div>
 
     <div class="billing-section" style="margin-top: 40px;">
-      <p>📞 Need help with billing? <a href="{{ url_for('contact') }}">Contact Support</a></p>
+      <p> Need help with billing? <a href="{{ url_for('contact') }}">Contact Support</a></p>
     </div>
   </section>
 
   <!-- Success Modal -->
   <div class="modal" id="successModal">
     <div class="modal-content">
-      <h3>✅ Payment Info Updated</h3>
+      <h3> Payment Info Updated</h3>
       <p>Your billing details were successfully updated.</p>
       <button onclick="closeModal()">Close</button>
     </div>
