@@ -186,7 +186,7 @@
     <button class="close-btn" onclick="closeMenu()">×</button>
     <nav>
       <!-- Home Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')"> Home ▼</a>
       <div id="home-submenu" class="dropdown-content">
         <a href="{{ url_for('index') }}">Main Home</a>
         <a href="{{ url_for('demo') }}">Demo</a>
@@ -198,7 +198,7 @@
       </div>
   
       <!-- Dashboard Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')"> Dashboard ▼</a>
       <div id="dashboard-submenu" class="dropdown-content">
         <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
         <a href="{{ url_for('analytics') }}">Analytics</a>
@@ -206,7 +206,7 @@
       </div>
   
       <!-- Upload Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')"> Upload ▼</a>
       <div id="upload-submenu" class="dropdown-content">
         <a href="{{ url_for('upload') }}">Upload CSV</a>
         <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
@@ -216,7 +216,7 @@
       </div>
   
       <!-- Pricing Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')"> Pricing ▼</a>
       <div id="pricing-submenu" class="dropdown-content">
         <a href="{{ url_for('pricing') }}">Pricing Plans</a>
         <a href="{{ url_for('checkout') }}">Checkout</a>
@@ -224,22 +224,22 @@
       </div>
   
       <!-- Testimonials Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')"> Testimonials ▼</a>
       <div id="testimonials-submenu" class="dropdown-content">
         <a href="{{ url_for('testimonials') }}">User Testimonials</a>
         <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
       </div>
   
       <!-- Legal + Contact -->
-      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
-      <a href="{{ url_for('contact') }}">📞 Contact</a>
-  
+      <a href="{{ url_for('data_privacy') }}"> Data Privacy</a>
+      <a href="{{ url_for('contact') }}"> Contact</a>
+
       <!-- Auth -->
       {% if current_user.is_authenticated %}
-        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+        <a href="{{ url_for('logout') }}"> Logout</a>
       {% else %}
-        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
-        <a href="{{ url_for('login') }}">🔑 Login</a>
+        <a href="{{ url_for('signup') }}"> Sign Up</a>
+        <a href="{{ url_for('login') }}"> Login</a>
       {% endif %}
     </nav>
   </aside>
@@ -267,7 +267,7 @@
 
   <!-- Signup Section -->
   <section class="signup-container">
-    <h1>📝 Create an Account</h1>
+    <h1> Create an Account</h1>
     <form action="/signup" method="post">
       <input type="text" name="name" placeholder="Full Name" required>
       <input type="email" name="username" placeholder="Email Address" required>
@@ -277,8 +277,8 @@
       <h3>Select Account Type</h3>
       <input type="hidden" name="account_type" id="account_type" value="Individual">
       <div class="account-options">
-        <button type="button" id="individual-btn" class="account-btn active" onclick="toggleAccountType('Individual')">👤 Individual</button>
-        <button type="button" id="business-btn" class="account-btn" onclick="toggleAccountType('Business')">🏢 Business</button>
+        <button type="button" id="individual-btn" class="account-btn active" onclick="toggleAccountType('Individual')"> Individual</button>
+        <button type="button" id="business-btn" class="account-btn" onclick="toggleAccountType('Business')"> Business</button>
       </div>
 
       <input type="text" name="company" placeholder="Company Name (Business only)">
