@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,7 +110,7 @@
     <button class="close-btn" onclick="closeMenu()">×</button>
     <nav>
       <!-- Home Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')"> Home ▼</a>
       <div id="home-submenu" class="dropdown-content">
         <a href="{{ url_for('index') }}">Main Home</a>
         <a href="{{ url_for('demo') }}">Demo</a>
@@ -124,14 +121,14 @@
         <a href="{{ url_for('benefits') }}">Benefits</a>
       </div>
       <!-- Dashboard Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')"> Dashboard ▼</a>
       <div id="dashboard-submenu" class="dropdown-content">
         <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
         <a href="{{ url_for('analytics') }}">Analytics</a>
         <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
       </div>
       <!-- Upload Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')"> Upload ▼</a>
       <div id="upload-submenu" class="dropdown-content">
         <a href="{{ url_for('upload') }}">Upload CSV</a>
         <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
@@ -140,27 +137,27 @@
         <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
       </div>
       <!-- Pricing Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')"> Pricing ▼</a>
       <div id="pricing-submenu" class="dropdown-content">
         <a href="{{ url_for('pricing') }}">Pricing Plans</a>
         <a href="{{ url_for('checkout') }}">Checkout</a>
         <a href="{{ url_for('billing') }}">Billing</a>
       </div>
       <!-- Testimonials Dropdown -->
-      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')"> Testimonials ▼</a>
       <div id="testimonials-submenu" class="dropdown-content">
         <a href="{{ url_for('testimonials') }}">User Testimonials</a>
         <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
       </div>
       <!-- Legal + Contact -->
-      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
-      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <a href="{{ url_for('data_privacy') }}"> Data Privacy</a>
+      <a href="{{ url_for('contact') }}"> Contact</a>
       <!-- Auth -->
       {% if current_user.is_authenticated %}
-        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+        <a href="{{ url_for('logout') }}"> Logout</a>
       {% else %}
-        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
-        <a href="{{ url_for('login') }}">🔑 Login</a>
+        <a href="{{ url_for('signup') }}"> Sign Up</a>
+        <a href="{{ url_for('login') }}"> Login</a>
       {% endif %}
     </nav>
   </aside>
@@ -173,35 +170,35 @@
 
   <!-- Your existing analytics content -->
   <main class="page-section">
-    <h1>📊 Churn Analytics</h1>
+    <h1> Churn Analytics</h1>
     <p class="subtitle">Explore AI-powered visual insights from your customer data.</p>
     <div class="analytics-grid">
       <div class="analytics-card">
-        <h3>📉 Overall Churn Rate</h3>
+        <h3> Overall Churn Rate</h3>
         <p><strong>12.4%</strong> of customers predicted to churn.</p>
       </div>
       <div class="analytics-card">
-        <h3>🧠 Top Predictive Features</h3>
+        <h3> Top Predictive Features</h3>
         <ul>
-          <li>📆 Customer Tenure</li>
-          <li>📞 Support Tickets</li>
-          <li>💳 Late Payments</li>
+          <li> Customer Tenure</li>
+          <li> Support Tickets</li>
+          <li> Late Payments</li>
         </ul>
       </div>
       <div class="analytics-card">
-        <h3>📂 Risk Breakdown by Segment</h3>
+        <h3> Risk Breakdown by Segment</h3>
         <p>Visualize churn distribution by age group, location, plan tier, and more.</p>
       </div>
       <div class="analytics-card">
-        <h3>📈 Feature Impact Analysis</h3>
+        <h3> Feature Impact Analysis</h3>
         <p>See how each variable influences churn predictions with interactive importance charts.</p>
       </div>
       <div class="analytics-card">
-        <h3>🛡️ Retention Strategy Insights</h3>
+        <h3> Retention Strategy Insights</h3>
         <p>Discover the best strategies to reduce churn based on behavioral triggers.</p>
       </div>
       <div class="analytics-card">
-        <h3>📥 Export & Action</h3>
+        <h3>Export & Action</h3>
         <p>Export insights and integrate them into your CRM or customer journey mapping tools.</p>
       </div>
     </div>
