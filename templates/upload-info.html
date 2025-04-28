@@ -101,7 +101,7 @@
   <button class="close-btn" onclick="closeMenu()">×</button>
   <nav>
     <!-- Home Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')"> Home ▼</a>
     <div id="home-submenu" class="dropdown-content">
       <a href="{{ url_for('index') }}">Main Home</a>
       <a href="{{ url_for('demo') }}">Demo</a>
@@ -113,7 +113,7 @@
     </div>
 
     <!-- Dashboard Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')"> Dashboard ▼</a>
     <div id="dashboard-submenu" class="dropdown-content">
       <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
       <a href="{{ url_for('analytics') }}">Analytics</a>
@@ -121,7 +121,7 @@
     </div>
 
     <!-- Upload Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')"> Upload ▼</a>
     <div id="upload-submenu" class="dropdown-content">
       <a href="{{ url_for('upload') }}">Upload CSV</a>
       <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
@@ -131,7 +131,7 @@
     </div>
 
     <!-- Pricing Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')"> Pricing ▼</a>
     <div id="pricing-submenu" class="dropdown-content">
       <a href="{{ url_for('pricing') }}">Pricing Plans</a>
       <a href="{{ url_for('checkout') }}">Checkout</a>
@@ -139,22 +139,22 @@
     </div>
 
     <!-- Testimonials Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')"> Testimonials ▼</a>
     <div id="testimonials-submenu" class="dropdown-content">
       <a href="{{ url_for('testimonials') }}">User Testimonials</a>
       <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
     </div>
 
     <!-- Legal + Contact -->
-    <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
-    <a href="{{ url_for('contact') }}">📞 Contact</a>
+    <a href="{{ url_for('data_privacy') }}"> Data Privacy</a>
+    <a href="{{ url_for('contact') }}"> Contact</a>
 
     <!-- Auth -->
     {% if current_user.is_authenticated %}
-      <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      <a href="{{ url_for('logout') }}"> Logout</a>
     {% else %}
-      <a href="{{ url_for('signup') }}">📝 Sign Up</a>
-      <a href="{{ url_for('login') }}">🔑 Login</a>
+      <a href="{{ url_for('signup') }}"> Sign Up</a>
+      <a href="{{ url_for('login') }}"> Login</a>
     {% endif %}
   </nav>
 </aside>
@@ -182,20 +182,20 @@
 
 <!-- Main Section -->
 <section class="page-section">
-  <h1 class="hero-title">📂 Secure Upload System</h1>
+  <h1 class="hero-title"> Secure Upload System</h1>
   <p class="subtitle">Every file upload is protected with top-tier encryption and analyzed instantly using Churn AI’s advanced engine.</p>
 
   <div class="accuracy-box">
     <ul class="checklist">
-      <li>🔐 Encrypted during upload & processing</li>
-      <li>⚡ Real-time churn predictions in seconds</li>
-      <li>🧠 Automated data cleaning and validation</li>
+      <li> Encrypted during upload & processing</li>
+      <li> Real-time churn predictions in seconds</li>
+      <li> Automated data cleaning and validation</li>
     </ul>
   </div>
 
   <div class="evaluation-box">
-    <p><strong>📁 Format:</strong> Compatible with most CRM exports (CSV format).</p>
-    <p><strong>📌 Example:</strong> Sample schema available on the <a href="{{ url_for('demo') }}">demo page</a>.</p>
+    <p><strong> Format:</strong> Compatible with most CRM exports (CSV format).</p>
+    <p><strong> Example:</strong> Sample schema available on the <a href="{{ url_for('demo') }}">demo page</a>.</p>
   </div>
 </section>
 
