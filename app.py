@@ -70,7 +70,7 @@ def create_app():
         from models.user import User
         from models.model import UploadHistory
         db.create_all()
-        print("✅ All tables created successfully.")
+        print("All tables created successfully.")
       
 
 
@@ -124,7 +124,7 @@ def save_plot_as_image(plot_func, path, *args, **kwargs):
     plot_func(*args, **kwargs)
     plt.savefig(path)
     plt.close()
-    print(f"📊 Chart saved to {path}")
+    print(f"Chart saved to {path}")
 
 # ------------------------ Example Utility for Dynamic Charts ------------------------ #
 
@@ -144,13 +144,13 @@ print(" Flask environment ready. Templates assumed present:")
 for template in ['index.html', 'login.html', 'signup.html', 'upload.html', 'dashboard.html']:
     print(f"   - templates/{template}")
 
-# 🧠 Load Model & Encoders
+# Load Model & Encoders
 try:
     model_path = os.path.join(MODEL_DIR, "churn_model.pkl")
     encoder_path = os.path.join(MODEL_DIR, "label_encoders.pkl")
     model = joblib.load(model_path)
     label_encoders = joblib.load(encoder_path)
-    print("✅ Churn prediction model and label encoders loaded successfully")
+    print("Churn prediction model and label encoders loaded successfully")
 except Exception as e:
     print(f" Failed to load model or encoders: {e}")
 
@@ -158,17 +158,17 @@ except Exception as e:
     label_encoders = {}
     print(f" Error loading model or encoders: {str(e)}")
 
-# ✅ Feature transformer wrapper
+# Feature transformer wrapper
 
 def transform_dataset(df):
-    print("🔍 Transforming dataset with safe column mapping")
+    print("Transforming dataset with safe column mapping")
     df, features = safe_map_columns(df)
     for col in FEATURES_OF_INTEREST:
         if col in df.columns:
             df = clean_numeric_column(df, col)
     return df, features
 
-# ✅ Label encoding safeguard
+# Label encoding safeguard
 
 def encode_labels(df, encoders):
     for col in df.columns:
@@ -178,7 +178,7 @@ def encode_labels(df, encoders):
             df[col] = le.transform(df[col])
     return df
 
-# ✅ Prediction core logic
+# Prediction core logic
 
 # Predicts churn using model, adds 'Yes/No' predictions and confidence % to DataFrame
 def generate_predictions(df, model, features):
@@ -190,7 +190,7 @@ def generate_predictions(df, model, features):
     df['Confidence'] = [round(prob * 100, 2) for prob in probs]
     return df, predictions, probs
 
-# ✅ Reason detection 
+# Reason detection 
 
 # Checks for high charges, short contracts, low scores to explain churn risk
 def identify_churn_reasons(df):
@@ -226,7 +226,7 @@ with app.app_context():
     upload_dir = app.config['UPLOAD_FOLDER']
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
-        print("📁 Uploads directory created")
+        print("Uploads directory created")
 
 # Check database and show startup info (optional)
 with app.app_context():
@@ -249,7 +249,7 @@ def save_plot_as_image(plot_func, path, *args, **kwargs):
     plot_func(*args, **kwargs)
     plt.savefig(path)
     plt.close()
-    print(f"📊 Chart saved: {path}")
+    print(f" Chart saved: {path}")
 
 # Sample Trend Chart
 def sample_churn_trend_plot():
@@ -276,7 +276,7 @@ for tpl in expected_templates:
 try:
     with app.app_context():
         
-        print(f"📊 User DB initialized at: {DB_PATH}")
+        print(f"User DB initialized at: {DB_PATH}")
 except Exception as e:
     print(f" DB setup failed: {e}")
 # 👤 Signup Route
@@ -323,7 +323,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        flash("✅ Account created! Please log in.", "success")
+        flash("Account created! Please log in.", "success")
         return redirect(url_for('login'))
 
     return render_template('signup.html')
@@ -346,7 +346,7 @@ def login():
 
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
-            flash("✅ Logged in successfully!", "success")
+            flash("Logged in successfully!", "success")
             return redirect(url_for('index'))
         else:
             flash(" Invalid credentials or account type.", "error")
@@ -363,7 +363,7 @@ def logout():
     flash("You have been logged out.", "info")
     return redirect(url_for('login'))
 
-# 🔐 Protected Dashboard
+#Protected Dashboard
 @app.route('/dashboard')
 @login_required
 def dashboard():
@@ -371,7 +371,7 @@ def dashboard():
     return render_template('dashboard.html', uploads=uploads)
 
 
-# 👤 Account Info Route (optional)
+# Account Info Route (optional)
 @app.route('/account')
 @login_required
 def account():
@@ -380,7 +380,7 @@ def account():
         'account_type': current_user.account_type
     })
 
-# 🔐 Role-based protection (optional)
+# Role-based protection (optional)
 def admin_only(view_func):
     @login_required
     def wrapped(*args, **kwargs):
@@ -390,13 +390,13 @@ def admin_only(view_func):
         return view_func(*args, **kwargs)
     return wrapped
 
-# 🧪 Admin Test Route
+# Admin Test Route
 @app.route('/admin-dashboard')
 @admin_only
 def admin_dashboard():
     return render_template('admin-dashboard.html')
 
-# 🔄 Session Check Helper
+# Session Check Helper
 @app.route('/session-status')
 def session_status():
     if current_user.is_authenticated:
@@ -484,7 +484,7 @@ def checkout():
 @app.route('/process-checkout', methods=['POST'])
 @login_required
 def process_checkout():
-    flash('✅ Payment processed successfully.', 'success')
+    flash('Payment processed successfully.', 'success')
     return redirect(url_for('dashboard'))
 # ----------------------------- UPLOAD CHECKPOINT--------------------------------------------#
 @app.route('/upload-checkpoint')
@@ -755,7 +755,7 @@ def handle_attrition_prediction():
 # 3. Default to 0% if no 'Yes' predictions exist (.get('Yes', 0))
         churn_rate = results['AttritionRisk'].value_counts(normalize=True).get('Yes', 0) * 100
 
-        # ✅ Save upload history
+        # Save upload history
         if current_user.is_authenticated:
             new_upload = UploadHistory(
                 user_id=current_user.id,
@@ -1299,7 +1299,7 @@ def download_attrition_report():
 
 #  run it
 if __name__ == '__main__':
-    print("\n🚀 Luxury Churn AI running at http://127.0.0.1:5000/ 🚀\n")
+    print("\n Luxury Churn AI running at http://127.0.0.1:5000/ 🚀\n")
     app.run(debug=True)
 
     
