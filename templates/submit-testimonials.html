@@ -159,7 +159,7 @@
   <button class="close-btn" onclick="closeMenu()">×</button>
   <nav>
     <!-- Home Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('home-submenu')"> Home ▼</a>
     <div id="home-submenu" class="dropdown-content">
       <a href="{{ url_for('index') }}">Main Home</a>
       <a href="{{ url_for('demo') }}">Demo</a>
@@ -171,7 +171,7 @@
     </div>
 
     <!-- Dashboard Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('dashboard-submenu')"> Dashboard ▼</a>
     <div id="dashboard-submenu" class="dropdown-content">
       <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
       <a href="{{ url_for('analytics') }}">Analytics</a>
@@ -179,7 +179,7 @@
     </div>
 
     <!-- Upload Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('upload-submenu')"> Upload ▼</a>
     <div id="upload-submenu" class="dropdown-content">
       <a href="{{ url_for('upload') }}">Upload CSV</a>
       <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
@@ -189,7 +189,7 @@
     </div>
 
     <!-- Pricing Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('pricing-submenu')"> Pricing ▼</a>
     <div id="pricing-submenu" class="dropdown-content">
       <a href="{{ url_for('pricing') }}">Pricing Plans</a>
       <a href="{{ url_for('checkout') }}">Checkout</a>
@@ -197,22 +197,22 @@
     </div>
 
     <!-- Testimonials Dropdown -->
-    <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+    <a href="javascript:void(0);" onclick="toggleDropdown('testimonials-submenu')"> Testimonials ▼</a>
     <div id="testimonials-submenu" class="dropdown-content">
       <a href="{{ url_for('testimonials') }}">User Testimonials</a>
       <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
     </div>
 
     <!-- Legal + Contact -->
-    <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
-    <a href="{{ url_for('contact') }}">📞 Contact</a>
+    <a href="{{ url_for('data_privacy') }}"> Data Privacy</a>
+    <a href="{{ url_for('contact') }}"> Contact</a>
 
     <!-- Auth -->
     {% if current_user.is_authenticated %}
-      <a href="{{ url_for('logout') }}">🔓 Logout</a>
+      <a href="{{ url_for('logout') }}"> Logout</a>
     {% else %}
-      <a href="{{ url_for('signup') }}">📝 Sign Up</a>
-      <a href="{{ url_for('login') }}">🔑 Login</a>
+      <a href="{{ url_for('signup') }}"> Sign Up</a>
+      <a href="{{ url_for('login') }}"> Login</a>
     {% endif %}
   </nav>
 </aside>
@@ -238,14 +238,14 @@
 
   <!-- Form Section -->
   <section class="testimonial-form-wrapper">
-    <h1>💬 Share Your Experience</h1>
-    <p>We'd love to hear how Churn AI has helped your business — but only if you'd like to share. 💛</p>
+    <h1> Share Your Experience</h1>
+    <p>We'd love to hear how Churn AI has helped your business — but only if you'd like to share. </p>
 
     <form action="{{ url_for('submit_testimonials') }}" method="post" class="testimonial-form">
       <input type="text" name="name" placeholder="Your Name (e.g. Priya Kapoor)" required>
       <input type="text" name="role" placeholder="Your Role & Company (e.g. CEO at RetailPro)" required>
       <textarea name="quote" placeholder="What would you like to say about Churn AI?" required></textarea>
-      <button type="submit">📣 Submit Testimonial</button>
+      <button type="submit"> Submit Testimonial</button>
     </form>
   </section>
 
