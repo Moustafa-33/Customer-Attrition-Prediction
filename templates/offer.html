@@ -55,7 +55,7 @@
     }
 
     ul li::before {
-      content: '✅';
+      content: '';
       position: absolute;
       left: 0;
       top: 8px;
@@ -199,7 +199,7 @@
   <aside class="sidebar" id="sidebar">
     <button class="close-btn" onclick="closeMenu()">×</button>
     <nav>
-      <a onclick="toggleDropdown('home-submenu')">🏠 Home ▼</a>
+      <a onclick="toggleDropdown('home-submenu')"> Home ▼</a>
       <div id="home-submenu" class="dropdown-content">
         <a href="{{ url_for('index') }}">Main Home</a>
         <a href="{{ url_for('demo') }}">Demo</a>
@@ -210,14 +210,14 @@
         <a href="{{ url_for('benefits') }}">Benefits</a>
       </div>
 
-      <a onclick="toggleDropdown('dashboard-submenu')">📊 Dashboard ▼</a>
+      <a onclick="toggleDropdown('dashboard-submenu')"> Dashboard ▼</a>
       <div id="dashboard-submenu" class="dropdown-content">
         <a href="{{ url_for('dashboard') }}">Main Dashboard</a>
         <a href="{{ url_for('analytics') }}">Analytics</a>
         <a href="{{ url_for('playbooks') }}">Retention Playbooks</a>
       </div>
 
-      <a onclick="toggleDropdown('upload-submenu')">📂 Upload ▼</a>
+      <a onclick="toggleDropdown('upload-submenu')"> Upload ▼</a>
       <div id="upload-submenu" class="dropdown-content">
         <a href="{{ url_for('upload') }}">Upload CSV</a>
         <a href="{{ url_for('upload_guidelines') }}">Upload Guidelines</a>
@@ -226,35 +226,35 @@
         <a href="{{ url_for('upload_troubleshooting') }}">Upload Troubleshooting</a>
       </div>
 
-      <a onclick="toggleDropdown('pricing-submenu')">💰 Pricing ▼</a>
+      <a onclick="toggleDropdown('pricing-submenu')"> Pricing ▼</a>
       <div id="pricing-submenu" class="dropdown-content">
         <a href="{{ url_for('pricing') }}">Pricing Plans</a>
         <a href="{{ url_for('checkout') }}">Checkout</a>
         <a href="{{ url_for('billing') }}">Billing</a>
       </div>
 
-      <a onclick="toggleDropdown('testimonials-submenu')">🗣️ Testimonials ▼</a>
+      <a onclick="toggleDropdown('testimonials-submenu')"> Testimonials ▼</a>
       <div id="testimonials-submenu" class="dropdown-content">
         <a href="{{ url_for('testimonials') }}">User Testimonials</a>
         <a href="{{ url_for('submit_testimonials') }}">Submit Testimonial</a>
       </div>
 
-      <a href="{{ url_for('data_privacy') }}">📜 Data Privacy</a>
-      <a href="{{ url_for('contact') }}">📞 Contact</a>
+      <a href="{{ url_for('data_privacy') }}"> Data Privacy</a>
+      <a href="{{ url_for('contact') }}"> Contact</a>
 
       {% if current_user.is_authenticated %}
-        <a href="{{ url_for('logout') }}">🔓 Logout</a>
+        <a href="{{ url_for('logout') }}"> Logout</a>
       {% else %}
-        <a href="{{ url_for('signup') }}">📝 Sign Up</a>
-        <a href="{{ url_for('login') }}">🔑 Login</a>
+        <a href="{{ url_for('signup') }}"> Sign Up</a>
+        <a href="{{ url_for('login') }}"> Login</a>
       {% endif %}
     </nav>
   </aside>
 
   <!-- Main Offer Content -->
   <section class="page-section">
-    <h1>🎉 Exclusive Launch Offer</h1>
-    <p>🚀 Take your customer retention to the next level.</p>
+    <h1> Exclusive Launch Offer</h1>
+    <p> Take your customer retention to the next level.</p>
     <p>Sign up today and get <strong>20% off</strong> your first 3 months of <strong>Churn AI Pro</strong> — our most advanced churn prediction platform yet.</p>
 
     <div class="offer-container">
@@ -271,14 +271,14 @@
     </div>
 
     <div class="pro-container">
-      <h2>💡 Why Churn AI Pro?</h2>
+      <h2> Why Churn AI Pro?</h2>
       <p style="max-width: 700px; margin: 16px auto;">
         Churn AI Pro is built for growing businesses that want to stop guessing and start acting on real customer behavior. Our powerful algorithms predict churn risk before it happens — helping you reduce loss and boost loyalty.
       </p>
       <ul>
-        <li>📊 <strong>95%+ prediction accuracy</strong> using machine learning</li>
-        <li>⚙️ <strong>Real-time insights</strong> with no coding required</li>
-        <li>🌐 <strong>Perfect for SaaS, eCommerce, or B2B industries</strong></li>
+        <li> <strong>95%+ prediction accuracy</strong> using machine learning</li>
+        <li> <strong>Real-time insights</strong> with no coding required</li>
+        <li> <strong>Perfect for SaaS, eCommerce, or B2B industries</strong></li>
       </ul>
     </div>
   </section>
