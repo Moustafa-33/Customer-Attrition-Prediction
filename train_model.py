@@ -84,7 +84,7 @@ def safe_map_columns(df):
     # Special case: Calculate monthly charges from annual salary if available
     if 'estimatedsalary' in df.columns and 'MonthlyCharges' not in mapped_df.columns:
         mapped_df['MonthlyCharges'] = pd.to_numeric(df['estimatedsalary'], errors='coerce') / 12
-        print("💡 Derived MonthlyCharges from EstimatedSalary")
+        print(" Derived MonthlyCharges from EstimatedSalary")
 
     return mapped_df
 
@@ -119,7 +119,7 @@ def encode_categoricals(df):
             le = LabelEncoder()
             df[col] = le.fit_transform(df[col].astype(str))
             label_encoders[col] = le
-            print(f"🔠 Encoded categorical: {col}")
+            print(f" Encoded categorical: {col}")
     return df, label_encoders
 
 def train_model(csv_path):
@@ -137,12 +137,12 @@ def train_model(csv_path):
     """
     # Resolve file path and load data
     path = resolve_csv_path(csv_path)
-    print("\n=== 🚀 Starting Model Training ===")
-    print(f"📄 Reading CSV from: {path}\n")
+    print("\n===  Starting Model Training ===")
+    print(f" Reading CSV from: {path}\n")
 
     try:
         df = pd.read_csv(path)
-        print("✅ CSV Loaded. Columns:", df.columns.tolist())
+        print(" CSV Loaded. Columns:", df.columns.tolist())
     except Exception as e:
         raise Exception(f"❌ CSV read error: {e}")
 
@@ -199,7 +199,7 @@ def train_model(csv_path):
 
     print("\n Model saved to: model/churn_model.pkl")
     print(" Encoders saved to: model/label_encoders.pkl")
-    print("✅ All done!")
+    print(" All done!")
 
 if __name__ == "__main__":
     # Set up command line argument parsing
