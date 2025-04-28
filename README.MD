@@ -1,61 +1,89 @@
-CUSTOMER ATTRTION,PREDICTION,RETENTION STRATEGY (Churn AI)
+CUSTOMER ATTRITION, PREDICTION, RETENTION STRATEGY (Churn AI)
 
-OVERVIEW
+Overview
 
-This project was developed to predict customer attrition using machine learning. The goal is to help businesses identify customers who are most likely to leave, enabling them to take early action and improve retention rates.
+This project was developed to predict customer attrition using machine learning. The goal is to help businesses identify customers who are most likely to leave, enabling them to take early action and improve retention rates. I designed this system to bring together practical machine learning, web development, and project management skills into a complete, professional-grade solution.
 
-I designed this system to bring together practical machine learning, web development, and project management skills into a complete, professional-grade solution.
+Key Features
 
-KEY FEATURES
+- Accurate Attrition Prediction: Trained on real customer data to generate meaningful churn predictions.  
+- User-Friendly CSV Upload: Users can easily upload datasets without needing complex formatting.  
+- Insightful Outputs: Prediction results are displayed clearly and professionally for easy interpretation.  
+- Clean, Responsive Front-End: Built with HTML and CSS, ensuring a smooth and accessible user experience.  
+- Version Control: Full GitHub repository management with integrated project tracking.
 
-Accurate Attrition Prediction: Trained on real customer data to provide meaningful churn predictions.
-User-Friendly CSV Upload: Allows users to easily upload datasets without complex formatting.
-Insightful Outputs: Displays clear prediction results in an accessible, professional interface.
-Clean, Responsive Front-End: Built with HTML and CSS, designed for a smooth user experience.
-Version Control: Full GitHub repository management and project tracking.
 Technologies Used
 
-STACK
-Python (Pandas, scikit-learn)
-Flask (backend framework)
-HTML5, CSS3 (frontend)
-Git and GitHub (version control and collaboration)
+- Python (Pandas, scikit-learn)  
+- Flask (backend framework)  
+- HTML5, CSS3 (frontend)  
+- Git and GitHub (version control and collaboration)
+
 How It Works
 
-The user uploads a CSV file containing customer data.
-The system processes the file and applies the trained machine learning model.
-Prediction results are generated and displayed on the dashboard.
-Users can view customer churn likelihoods and take action based on the insights.
+The user uploads a CSV file containing customer data. The system processes the file and applies a pre-trained machine learning model. Prediction results are then generated and displayed on a clean, interactive dashboard, helping users understand which customers are at higher risk of churn.
+
 Project Structure
 
-Customer-Attrition-Prediction/
-│
-├── static/
-│   └── css/
-│       └── style.css
-│
-├── templates/
-│   ├── index.html
-│   ├── upload.html
-│   └── dashboard.html
-│
-├── app.py
-├── model.pkl
-└── README.md
+- Customer-Attrition-Prediction/  
+  - static/  
+    - css/  
+      - style.css  
+  - templates/  
+    - index.html  
+    - upload.html  
+    - dashboard.html  
+  - app.py  
+  - model.pkl  
+  - README.md
 
 Future Improvements
 
-Improve model performance through advanced feature engineering and hyperparameter tuning.
-Add the ability to download a PDF report summarising prediction results.
-Extend the platform with user accounts and upload history tracking.
+- Enhance model performance through advanced feature engineering and hyperparameter tuning.  
+- Add the ability to download a full PDF report summarising prediction results.  
+- Extend the platform to support user accounts and track historical uploads for better insights.
+
 Getting Started
 
 To run the project locally:
 
-git clone https://github.com/Moustafa-33/Customer-Attrition-Prediction.git
-cd Customer-Attrition-Prediction
-python -m venv venv
-source venv/bin/activate  # On Windows use: .\venv\Scripts\activate
-pip install -r requirements.txt
-python app.py
-Then open your browser and navigate to http://localhost:5000.
+1. Clone the repository:  
+   
+   git clone https://github.com/Moustafa-33/Customer-Attrition-Prediction.git
+   
+
+2. Navigate into the project directory:  
+   
+   cd Customer-Attrition-Prediction
+   
+
+3. Set up a virtual environment:  
+   
+   python -m venv venv
+   
+
+4. Activate the virtual environment:  
+   - On macOS/Linux:  
+     
+     source venv/bin/activate
+     
+   - On Windows:  
+     
+     .\venv\Scripts\activate
+     
+
+5. Install the required dependencies:  
+   
+   pip install -r requirements.txt
+   
+
+6. Run the Flask application:  
+   
+   python app.py
+   
+
+7. Open your browser and navigate to:  
+   
+   http://localhost:5000
+   
+
