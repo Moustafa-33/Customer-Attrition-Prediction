@@ -146,7 +146,7 @@ def contact():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()  # Ensures database is created on startup
-        print(f"✅ Database checked and created if missing at: {DB_PATH}")
+        print(f" Database checked and created if missing at: {DB_PATH}")
     
-    print("\n🚀 Flask is running at: http://127.0.0.1:5000/ 🚀\n")
+    print("\n Flask is running at: http://127.0.0.1:5000/ 🚀\n")
     app.run(debug=True)
