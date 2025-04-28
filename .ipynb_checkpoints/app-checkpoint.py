@@ -33,7 +33,7 @@ class User(UserMixin, db.Model):
 # Create Database Tables (Ensures Database is Created)
 with app.app_context():
     db.create_all()
-    print(f"✅ Database created successfully at: {DB_PATH}")
+    print(f" Database created successfully at: {DB_PATH}")
 
 @login_manager.user_loader
 def load_user(user_id):
