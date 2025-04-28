@@ -686,7 +686,7 @@ def handle_attrition_prediction():
         df = pd.read_csv(filepath)
         df.columns = [col.strip().lower() for col in df.columns]  # Standardize column names
         df = df.loc[:, ~df.columns.duplicated()]  # Keep only first occurrence of duplicate columns
-        print("\n🧾 Uploaded Columns:", df.columns.tolist())  # Show cleaned columns
+        print("\n Uploaded Columns:", df.columns.tolist())  # Show cleaned columns
         
         # === Map aliases to standard features ===
         mapped_cols = {}
