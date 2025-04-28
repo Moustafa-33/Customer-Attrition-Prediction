@@ -144,7 +144,7 @@ def train_model(csv_path):
         df = pd.read_csv(path)
         print(" CSV Loaded. Columns:", df.columns.tolist())
     except Exception as e:
-        raise Exception(f"❌ CSV read error: {e}")
+        raise Exception(f" CSV read error: {e}")
 
     # Standardize columns and features
     df = safe_map_columns(df)
