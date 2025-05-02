@@ -85,5 +85,22 @@ To start this project
 7. Open your browser and navigate to:  
    
    http://localhost:5000
+
+
+
+---
+
+Project Diagrams
+
+Gantt Chart  
+![Gantt Chart](CHURN%20AI/output.png)
+
+Use Case Document (PDF)  
+[View Use Case Diagram](CHURN%20AI/CHURN%20AI%20USE%20CASE.pdf)
+
+ERD + Class Diagrams (PDF)  
+[View ERD and Class Diagrams](CHURN%20AI/Mustafa.pdf)
+
+
    
 
