@@ -2,15 +2,15 @@ CUSTOMER ATTRITION, PREDICTION, RETENTION STRATEGY (Churn AI)
 
 Overview
 
-This project was developed to predict customer attrition using machine learning. The goal is to help businesses identify customers who are most likely to leave, enabling them to take early action and improve retention rates. I designed this system to bring together practical machine learning, web development, and project management skills into a complete, professional-grade solution.
+The main target of this project was to initally predict customer attrition through the use of machine learning. Main objective being to aid businesses through identifing which sutomer is most at risk of leaving. Thus enabling the consumer to take iniative and overall imporve retention rates. I've managed to create this project with the main gial of being to combine both practical machine learinign, web development as well as project management skills for it to result into a high-level soltuion to the main problem of "Churn".
 
 Key Features
 
-- Accurate Attrition Prediction: Trained on real customer data to generate meaningful churn predictions.  
-- User-Friendly CSV Upload: Users can easily upload datasets without needing complex formatting.  
-- Insightful Outputs: Prediction results are displayed clearly and professionally for easy interpretation.  
-- Clean, Responsive Front-End: Built with HTML and CSS, ensuring a smooth and accessible user experience.  
-- Version Control: Full GitHub repository management with integrated project tracking.
+- Percise Attrition Prediction: Ive initally trinaed this model through the use of real customer data in order to generate attrition predictions.  
+- CSV Upload: consumers are able to easily upload datasets (CSVs) with peersonal consumer information.  
+- Insightful Outputs: The results are then presented to the conusmer both visually on the wbeiste , but also able to download a PDF genrated with further attrtion techniques that can be utilised for reduciong churn.  
+- A Responsive Front-End: Created with HTML and CSS, assuring a low level of cogantive overalod and accessible user experience.  
+- Version Control:GitHub repository management as well as project tracking.
 
 Technologies Used
 
@@ -21,7 +21,7 @@ Technologies Used
 
 How It Works
 
-The user uploads a CSV file containing customer data. The system processes the file and applies a pre-trained machine learning model. Prediction results are then generated and displayed on a clean, interactive dashboard, helping users understand which customers are at higher risk of churn.
+The consumer ( a business) initally uploads a CSV file that conatins  personal customer data. The webiste utlimaltley processes the file and applies a pre-trained machine learning model. Prediction results are then displayed on the website through the use of the results page, aiding consumers to understand which customers are at higher risk of attricting and thus leaving their business or service that they provide.
 
 Project Structure
 
@@ -39,13 +39,13 @@ Project Structure
 
 Future Improvements
 
-- Enhance model performance through advanced feature engineering and hyperparameter tuning.  
-- Add the ability to download a full PDF report summarising prediction results.  
-- Extend the platform to support user accounts and track historical uploads for better insights.
+- Further improve model performance through the use of feature engineering as well as hyperparameter tuning.  
+- Further fine tune the feature on my website where it allows the conusmers to download a full PDF report summarising prediction results.  
+- Lastly to enhance the platform to support business accounts and to account for historical uploads for better insights.
 
-Getting Started
 
-To run the project locally:
+To start this project 
+
 
 1. Clone the repository:  
    
