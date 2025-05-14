@@ -1110,7 +1110,7 @@ def predict_attrition():
 @login_required
 def download_attrition_report():
     """
-    Generates and downloads a PDF report of customer churn predictions.
+    Creates and downloads a PDF report of customer churn predictions.
     This endpoint:
     1. Validates existing prediction results
     2. Calculates key churn metrics
@@ -1194,9 +1194,9 @@ def download_attrition_report():
         pdf.cell(0, 10, "Executive Summary", ln=True)
         pdf.set_font('Arial', '', 12)
         pdf.multi_cell(0, 8,
-            f"This report analyzes customer churn risk for {len(df)} customers. "
+            f"This report analyzes consumer attrtion risk for {len(df)} customers. "
             f"The model identified {high_risk_count} high-risk customers ({churn_rate:.1f}% churn rate). "
-            "Immediate action is recommended for the top at-risk customers listed below.")
+            "Instant action is recommended for the top at-risk customers listed below.")
         pdf.ln(10)
 
         # === KEY METRICS SECTION ===
@@ -1299,7 +1299,7 @@ def download_attrition_report():
 
 #  run it
 if __name__ == '__main__':
-    print("\n Luxury Churn AI running at http://127.0.0.1:5000/ 🚀\n")
+    print("\n Luxury Churn AI running at http://127.0.0.1:5000/ \n")
     app.run(debug=True)
 
     
